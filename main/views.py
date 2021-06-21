@@ -12,3 +12,20 @@ class GetUsersView(views.View):
            'users': allUser
            }
        return render(request, template_name, context)
+
+#buscar un usuario en especifico por id
+def DetalleUsuario(request, id):
+    user = UserMOdel.objects.get(pk =id)
+    template_name ='main/detail.html'
+    context = {
+        'user': user
+        }
+    return render(request,template_name,context)
+
+class CreateUserView(views.View):
+
+    template_name = 'main/create.html'
+    def get(self,request):
+        return render(request,self.template_name)
+   
+    
