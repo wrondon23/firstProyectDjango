@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <table>
+    <form action="{% if action == 'update' %}
+                {% url 'user:update' user.id %}
+                {% else %}
+                 {% url 'user:create' %}
+                 {% endif %}" 
+      method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value=" {% if action == 'update'  %}Actualizar{% else %}Crear{% endif %} ">
+ </table>
+</form>
+{% endblock content %}
+

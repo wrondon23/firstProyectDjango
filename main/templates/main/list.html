@@ -1,12 +1,16 @@
- {% extends 'base.html'%}
+{% extends 'base.html'%}
 
-    {% block content %}
-    <h1>Usuarios registrado</h1>
-    <ul>
-        {% for user in users %}
-         <a href ="/main/{{user.id}}"</a>
-        <li>{{user.first_name}} {{user.last_name}} - {{user.email}} </li>
-        {% endfor %}
-      
-    </ul>
-    {%endblock%}
+ {% block content %}
+
+<h1>Usuarios registrado</h1>
+<ul>
+  {% for user in users %}
+  <a href="{% url 'user:detail' user.id %}">
+  <li>{{user.first_name}} {{user.last_name}} - {{user.email}}</li>  
+  {% endfor %}
+  </a>
+</ul>
+
+
+{%endblock%}
+

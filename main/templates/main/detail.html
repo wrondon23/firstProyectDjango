@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block content %}
 
@@ -6,9 +6,15 @@
 <p>Email: <b>{{user.email}}</b></p>
 <p>Telefono: <b>{{user.phone_number}}</b></p>
 <p>Genero: <b>{{user.get_gender_display}}</b></p>
+
 {% if user.date_birth %}
 <p>fecha nacimiento: <b>{{user.date_birth}}</b></p>
+
 {% else %}
-<p> Fecha de nacimiento no indicada </p>
+    <p>Fecha de nacimiento no indicada</p>
 {% endif %}
+<a href="{% url 'user:update' user.id %}"><button>Editar usuario</button></a> 
+<a href="{% url 'user:delete' user.id %}"><button>Eliminar usuario</button></a> 
+
+
 {% endblock content %}
