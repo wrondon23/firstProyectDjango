@@ -5,3 +5,5 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = UserMOdel
         fields ='__all__'
+        
+        

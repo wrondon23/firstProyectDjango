@@ -1,8 +1,6 @@
-{% extends 'base.html' %} 
-
-{% block content %}
-
-<h1>{{user.firt_name}} {{user.last_name}}</h1>
+{% extends 'base.html' %} {% block content %}
+<img src="{{user.profile.get_image_url}}" alt="" width="200" height="200" />
+<h1>{{user.full_name}}</h1>
 <p>Email: <b>{{user.email}}</b></p>
 <p>Telefono: <b>{{user.phone_number}}</b></p>
 <p>Genero: <b>{{user.get_gender_display}}</b></p>
@@ -11,10 +9,17 @@
 <p>fecha nacimiento: <b>{{user.date_birth}}</b></p>
 
 {% else %}
-    <p>Fecha de nacimiento no indicada</p>
+<p>Fecha de nacimiento no indicada</p>
 {% endif %}
-<a href="{% url 'user:update' user.id %}"><button>Editar usuario</button></a> 
-<a href="{% url 'user:delete' user.id %}"><button>Eliminar usuario</button></a> 
+<h2>Biografia</h2>
+<p>{{user.profile.bio}}</p>
+{% if user.profile.is_public %}
 
+<h3 style="color: green">PERFIL PUBLICO</h3>
+{% else %}
+<h3 style="color: red">PERFIL PRIVADO</h3>
+{% endif %}
+<a href="{% url 'user:update' user.id %}"><button>Editar usuario</button></a>
+<a href="{% url 'user:delete' user.id %}"><button>Eliminar usuario</button></a>
 
 {% endblock content %}
