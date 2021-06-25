@@ -1,16 +1,28 @@
-{% extends 'base.html'%}
+{% extends 'base.html'%} {% block content %}
 
- {% block content %}
-
-<h1>Usuarios registrado</h1>
-<ul>
-  {% for user in users %}
-  <a href="{% url 'user:detail' user.id %}">
-  <li>{{user.full_name}} - {{user.email}}</li>  
-  {% endfor %}
-  </a>
-</ul>
-
+<h2>listado usuarios</h2>
+<div>
+  <a href="{% url 'user:list' %}"><li>Ver la lista de usuarios</li></a>
+  <a href="{% url 'user:create' %}"><li>Nuevo Usuario</li></a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+     </tr>
+  </thead>
+  <tbody>
+      {% for user in users %}
+    <tr>
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.full_name}}</td>
+      <td>{{user.email}}</td>
+      <td>  <a href="{% url 'user:detail' user.id %}"></td>
+     {% endfor %}
+  
+  </tbody>
+</table>
 
 {%endblock%}
-
