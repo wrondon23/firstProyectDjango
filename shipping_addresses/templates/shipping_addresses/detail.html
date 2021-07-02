@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Direccion # {{address.id}}</h5>
+<div class="card" style="width: 48rem;">
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">{{address.street}}</h6>
+    <p class="card-text">{{address.city}}</p>
+    <p class="card-text">{{address.state}}</p>
+    <p class="card-text">{{address.city}}</p>
+    
+  </div>
+</div>
+
+{% endblock  %}
+

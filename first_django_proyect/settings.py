@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'shipping_addresses',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +80,21 @@ WSGI_APPLICATION = 'first_django_proyect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'appDjango2',
+        'USER': 'wrondon',
+        'PASSWORD': 'glenis1225',
+        'HOST': 'LAPTOP-GB1GCU55',
+        'PORT': '',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
+    },
 }
+
+
+
 
 
 # Password validation

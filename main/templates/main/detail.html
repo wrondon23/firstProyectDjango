@@ -1,25 +1,59 @@
 {% extends 'base.html' %} {% block content %}
-<img src="{{user.profile.get_image_url}}" alt="" width="200" height="200" />
-<h1>{{user.full_name}}</h1>
-<p>Email: <b>{{user.email}}</b></p>
-<p>Telefono: <b>{{user.phone_number}}</b></p>
-<p>Genero: <b>{{user.get_gender_display}}</b></p>
+<div class="card" style="width: 28rem;">
+  <img class="card-img-top" src="{{user.profile.get_image_url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{user.full_name}}</h5>
+    <p class="card-text">{{user.profile.bio}}</p>
+  </div>
+    <ul class="list-group list-group-flush">
+       <li class="list-group-item">{{user.email}}</li>
+      <li class="list-group-item">{{user.get_gender_display}}</li>
+      {% if user.date_birth %}
+    <li class="list-group-item">{{user.date_birth}}</li>
+      {% else %}
+        <p>Fecha de nacimiento no indicada</p>
+      {% endif %}
+  </ul>
+  <div>
+    <h5>Direcciones de envio registrada</h5>
 
-{% if user.date_birth %}
-<p>fecha nacimiento: <b>{{user.date_birth}}</b></p>
+      <a href="{% url 'addresses:create' user.id %}">
+         <button>Agregar una nueva direccion</button>
+      </a>
 
-{% else %}
-<p>Fecha de nacimiento no indicada</p>
-{% endif %}
-<h2>Biografia</h2>
-<p>{{user.profile.bio}}</p>
-{% if user.profile.is_public %}
+     {% if user.addresses.all|length > 0  %}
+    <ul>
+            {% for  address in user.addresses.all  %}
+         <a href=" {% url 'addresses:detail' address.id  %}">
+             <li>
+             {{address.street}} - {{address.zip_code}}
+         <a href=" {% url 'addresses:detail' address.id  %}">
+            <a href="{% url 'addresses:update' address.id %}">
+             <button>editar</button>
+             </a> 
+             <a href="{% url 'addresses:delete' address.id %}">
+             <button>Eliminar</button>
+             </a>  
+             </li>
+         </a>
+            {% endfor %}
+
+    </ul>
+      {% else %}
+            <h6>Todavia no tiene direcciones registradas</h6>
+      {% endif %}
+  </div>
+  <div class="card-body">
+    <a href="#" class="card-link"><a href="{% url 'user:update' user.id %}"><button>Editar usuario</button></a>
+    <a href="#" class="card-link"><a href="{% url 'user:delete' user.id %}"><button>Eliminar usuario</button></a>
+  </div>
+      {% if user.profile.is_public %}
 
 <h3 style="color: green">PERFIL PUBLICO</h3>
 {% else %}
 <h3 style="color: red">PERFIL PRIVADO</h3>
 {% endif %}
-<a href="{% url 'user:update' user.id %}"><button>Editar usuario</button></a>
-<a href="{% url 'user:delete' user.id %}"><button>Eliminar usuario</button></a>
+</div>
+
 
 {% endblock content %}

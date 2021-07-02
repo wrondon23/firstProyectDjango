@@ -1,9 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 
-<h2>listado usuarios</h2>
+
 <div>
-  <a href="{% url 'user:list' %}"><li>Ver la lista de usuarios</li></a>
-  <a href="{% url 'user:create' %}"><li>Nuevo Usuario</li></a>
+  <a href="{% url 'user:create' %}" class="btn btn-primary">Nuevo Usuario</a>
 </div>
 <table class="table">
   <thead>
@@ -11,18 +10,20 @@
       <th scope="col">id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Email</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
      </tr>
   </thead>
   <tbody>
       {% for user in users %}
     <tr>
       <th scope="row">{{user.id}}</th>
-      <td>{{user.full_name}}</td>
+      <td><a href="{% url 'user:detail' user.id %}">{{user.full_name}}</td>
       <td>{{user.email}}</td>
-      <td>  <a href="{% url 'user:detail' user.id %}"></td>
-     {% endfor %}
-  
-  </tbody>
+      <td><a href="{% url 'user:detail' user.id %}" class="btn btn-secondary">Detalle</td>
+      <td><a href="{% url 'user:delete' user.id  %}" class="btn btn-danger">Eliminar</td>
+   {% endfor %}
+</tbody>
 </table>
 
 {%endblock%}
